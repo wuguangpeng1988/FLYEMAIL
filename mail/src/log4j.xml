@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration>
+	<appender name="ConsoleAppender" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t:%r] %-5p %c{1}:%L - %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="RollingFileAppender" class="org.apache.log4j.RollingFileAppender">
+		<param name="Append" value="true" />
+		<param name="MaxFileSize" value="100MB" />
+		<param name="File" value="logs/bedc.log" />
+		<param name="MaxBackupIndex" value="100" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t:%r] %-5p %c{1}:%L - %m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="DailyRollingFileAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="DatePattern" value="'.'yy-MM-dd"/>
+		<param name="Append" value="true" />
+		<param name="File" value="logs/bedc-all.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t:%r] %-5p %c{1}:%L - %m%n" />
+		</layout>
+	</appender>
+		
+	<appender name="ERROR" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="logs/bedc-error.log"/>
+		<param name="Append" value="true"/>
+		<param name="MaxFileSize" value="100MB"/>
+		<param name="MaxBackupIndex" value="100"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t:%r] %-5p %c{1}:%L - %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMax" value="ERROR" />
+			<param name="LevelMin" value="ERROR" />
+		</filter>
+	</appender>
+
+<!--    <logger name="test" additivity="false">
+        <level value="ERROR"/>
+        <appender-ref ref="ConsoleAppender"/>
+        <appender-ref ref="DailyRollingFileAppender" />
+        <appender-ref ref="RollingFileAppender" />
+        <appender-ref ref="ERROR" />
+    </logger> -->
+    
+<!--     <logger name="cn.gp" additivity="false">
+        <level value="ERROR"/>
+        <appender-ref ref="ConsoleAppender"/>
+        <appender-ref ref="DailyRollingFileAppender" />
+        <appender-ref ref="RollingFileAppender" />
+        <appender-ref ref="ERROR" />
+    </logger> -->
+
+
+	<root>
+		<priority value="info" />
+		<appender-ref ref="ConsoleAppender" />
+		<appender-ref ref="DailyRollingFileAppender" />
+	</root>
+
+</log4j:configuration>
